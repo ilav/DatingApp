@@ -27,7 +27,6 @@ export class ErrorInterceptor implements HttpInterceptor {
             console.error(applicationError);
             return throwError(applicationError);
           }
-          debugger;
           const serverError = error.error.errors || error.error;
           let modalStateErrors = '';
           if (serverError && typeof serverError === 'object') {
