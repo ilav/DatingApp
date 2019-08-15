@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Http;
 
 namespace DatingApp.API.Helpers
@@ -9,6 +10,20 @@ namespace DatingApp.API.Helpers
             response.Headers.Add("Application-Error", message);
             response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
             response.Headers.Add("Access-Control-Allow-Origin", "*");
+        }
+        public static int CalculateAge(this DateTime theDateTime)
+        {
+            var age = DateTime.Today.Year - theDateTime.Year;
+
+            // If adding years to birthDate property makes it greater
+            // than today's date, then it means the user is not
+            // celebrating his birthday yet this year
+            if (theDateTime.AddYears(age) > DateTime.Today)
+            {
+                age--;
+            }
+
+            return age;
         }
     }
 }
