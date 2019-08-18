@@ -1,6 +1,13 @@
 <div class="container mt-4">
   <div class="row">
-    <h1>{{user.knownAs}}'s Profile</h1>
+    <div class="col-sm-4">
+      <h1>Your Profile</h1>
+    </div>
+    <div class="col-sm-8">
+      <div *ngIf="editForm.dirty" class="alert alert-info">
+        <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
+      </div>
+    </div>
   </div>
   <div class="row">
     <!--
@@ -34,11 +41,8 @@
         </div>
         <div class="card-footer">
           <!--d-flex will give the <div> a display of flex-->
-          <div class="btn-group d-flex">
-            <!--w-100 give the button a width of 100-->
-            <!-- <button class="btn btn-primary w-100" (click)="sendLike(user.id)">Like</button>
-            <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button> -->
-          </div>
+          <!--w-100 give the button a width of 100-->
+          <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
         </div>
       </div>
     </div>
@@ -52,21 +56,25 @@
                 using the @ViewChild decorator
             -->
         <tabset class="member-tabset" #memberTabs>
-          <tab heading="About {{user?.knownAs}}">
-            <h4>Description</h4>
-            <p>{{user.introduction}}</p>
-            <h4>Looking For</h4>
-            <p>{{user.lookingFor}}</p>
+          <tab heading="Edit Profile">
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
+              <h4>Description</h4>
+              <textarea name="introduction" rows="6" class="form-control" [(ngModel)]="user.introduction"></textarea>
+              <h4>Looking For</h4>
+              <textarea name="lookingFor" rows="6" class="form-control" [(ngModel)]="user.lookingFor"></textarea>
+              <h4>Interests</h4>
+              <textarea name="interests" rows="6" class="form-control" [(ngModel)]="user.interests"></textarea>
+              <h4>Location Details</h4>
+              <div class="form-inline">
+                <label for="city" for="city">City</label>
+                <input type="text" class="form-control" name="city" [(ngModel)]="user.city">
+                <label for="country" for="city">Country</label>
+                <input type="text" class="form-control" name="country" [(ngModel)]="user.country">
+              </div>
+            </form>
           </tab>
-          <tab heading="Interests">
-            <h4>Interests</h4>
-            <p>{{user.interests}}</p>
-          </tab>
-          <tab heading="Photos">
-            <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
-          </tab>
-          <tab heading="Messages">
-            <!-- <app-member-messages [recipientId]="user.id"></app-member-messages> -->
+          <tab heading="Edit Photos">
+            <p>will go here</p>
           </tab>
         </tabset>
       </div>

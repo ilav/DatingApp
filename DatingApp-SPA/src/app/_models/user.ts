@@ -15,7 +15,7 @@ export interface User {
   // This is optional that is why we use the 'elvies' or '?' operator
   // Optional properties should come after the required properties or else you will get
   // an error
-  interest?: string;
+  interests?: string;
   introduction?: string;
   lookingFor?: string;
   photos?: Photo[];
