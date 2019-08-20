@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm', { static: false }) editForm: NgForm;
   user: User;
+  photoUrl: string;
   // The prevent-unsaved-changes.guard.ts prevents the user from clicking other
   // links within the page while there are still unsaved changes in the edit form.
   // But, Angular does not have access 'outside' the route
@@ -38,6 +39,7 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
+    this.authService.currentPhotoUrl.subscribe(p => (this.photoUrl = p));
   }
 
   updateUser() {
@@ -52,5 +54,8 @@ export class MemberEditComponent implements OnInit {
           this.alertify.error(error);
         }
       );
+  }
+  updateMainPhoto(url: string) {
+    this.user.photoUrl = url;
   }
 }
