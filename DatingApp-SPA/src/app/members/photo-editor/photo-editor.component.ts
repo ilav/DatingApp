@@ -1,9 +1,8 @@
-import { AlertifyService } from './../../_services/alertify.service';
 import { Photo } from './../../_models/photo';
+import { AlertifyService } from './../../_services/alertify.service';
 import { UserService } from './../../_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Photo } from 'src/app/_models/photo';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 
@@ -66,6 +65,14 @@ export class PhotoEditorComponent implements OnInit {
           isApproved: false
         };
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.authService.changeMemberPhoto(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem(
+            'user',
+            JSON.stringify(this.authService.currentUser)
+          );
+        }
       }
     };
   }
