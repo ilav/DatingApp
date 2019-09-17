@@ -37,8 +37,8 @@
           <!--d-flex will give the <div> a display of flex-->
           <div class="btn-group d-flex">
             <!--w-100 give the button a width of 100-->
-            <!-- <button class="btn btn-primary w-100" (click)="sendLike(user.id)">Like</button>
-            <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button> -->
+            <button class="btn btn-primary w-100">Like</button>
+            <button class="btn btn-success w-100" (click)="selectTab(3)">Message</button>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@
             <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
           </tab>
           <tab heading="Messages">
-            <!-- <app-member-messages [recipientId]="user.id"></app-member-messages> -->
+            <app-member-messages [recipientId]="user.id"></app-member-messages>
           </tab>
         </tabset>
       </div>
